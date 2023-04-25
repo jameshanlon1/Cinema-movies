@@ -1,7 +1,7 @@
 package utils
 
 import models.description
-import models.movie
+import models.Movie
 
 object Utilities {
 
@@ -9,7 +9,7 @@ object Utilities {
     //      name; we don't have to create an object of Utilities to use them.
 
     @JvmStatic
-    fun formatListString(notesToFormat: List<movie>): String =
+    fun formatListString(notesToFormat: List<Movie>): String =
         notesToFormat
             .joinToString(separator = "\n") { movie ->  "$movie" }
 
