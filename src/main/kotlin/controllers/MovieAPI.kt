@@ -86,7 +86,7 @@ class MovieAPI() {
     // ----------------------------------------------
     //  LISTING METHODS FOR Description
     // ----------------------------------------------
-    fun listTodoDescription(): String =
+    fun listToDoDescriptions(): String =
         if (numberOfMovies() == 0) "No Movies stored"
         else {
             var listOfTodoDescription = ""
@@ -103,7 +103,7 @@ class MovieAPI() {
     // ----------------------------------------------
     //  COUNTING METHODS FOR ITEMS
     // ----------------------------------------------
-    fun numberOfToDoDescription(): Int {
+    fun numberOfToDoDescriptions(): Int {
         var numberOfToDoDescriptions = 0
         for (Movie in Movies) {
             for (description in Movie.descriptions) {
