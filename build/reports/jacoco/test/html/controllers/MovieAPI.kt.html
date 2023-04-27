@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MovieAPI.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cinema-movies</a> &gt; <a href="index.source.html" class="el_package">controllers</a> &gt; <span class="el_source">MovieAPI.kt</span></div><h1>MovieAPI.kt</h1><pre class="source lang-java linenums">package controllers
+
+import models.Movie
+import utils.Utilities.formatListString
+import java.util.ArrayList
+
+<span class="nc" id="L7">class MovieAPI() {</span>
+
+<span class="nc" id="L9">    private var Movies = ArrayList&lt;Movie&gt;()</span>
+
+    // ----------------------------------------------
+    //  For Managing the id internally in the program
+    // ----------------------------------------------
+    private var lastId = 0
+<span class="nc" id="L15">    private fun getId() = lastId++</span>
+
+    // ----------------------------------------------
+    //  CRUD METHODS FOR Movie ArrayList
+    // ----------------------------------------------
+    fun add(Movie: Movie): Boolean {
+<span class="nc" id="L21">        Movie.MovieId = getId()</span>
+<span class="nc" id="L22">        return Movies.add(Movie)</span>
+    }
+
+<span class="nc bnc" id="L25" title="All 2 branches missed.">    fun delete(id: Int) = Movies.removeIf { Movie -&gt; Movie.MovieId == id }</span>
+
+    fun update(id: Int, Movie: Movie?): Boolean {
+        // find the Movie object by the index number
+<span class="nc" id="L29">        val foundMovie = findMovie(id)</span>
+
+        // if the Movie exists, use the Movie details passed as parameters to update the found Movie in the ArrayList.
+<span class="nc bnc" id="L32" title="All 4 branches missed.">        if ((foundMovie != null) &amp;&amp; (Movie != null)) {</span>
+<span class="nc" id="L33">            foundMovie.MovieTitle = Movie.MovieTitle</span>
+<span class="nc" id="L34">            foundMovie.MoviePriority = Movie.MoviePriority</span>
+<span class="nc" id="L35">            foundMovie.MovieCategory = Movie.MovieCategory</span>
+<span class="nc" id="L36">            return true</span>
+        }
+
+        // if the Movie was not found, return false, indicating that the update was not successful
+<span class="nc" id="L40">        return false</span>
+    }
+
+    fun archiveMovie(id: Int): Boolean {
+<span class="nc" id="L44">        val foundMovie = findMovie(id)</span>
+<span class="nc bnc" id="L45" title="All 4 branches missed.">        if ((foundMovie != null) &amp;&amp; (!foundMovie.isMovieArchived)</span>
+            //  &amp;&amp; ( foundMovie.checkMovieCompletionStatus())
+        ) {
+<span class="nc" id="L48">            foundMovie.isMovieArchived = true</span>
+<span class="nc" id="L49">            return true</span>
+        }
+<span class="nc" id="L51">        return false</span>
+    }
+
+    // ----------------------------------------------
+    //  LISTING METHODS FOR Movie ArrayList
+    // ----------------------------------------------
+    fun listAllMovies() =
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        if (Movies.isEmpty()) &quot;No Movies stored&quot;</span>
+<span class="nc" id="L59">        else formatListString(Movies)</span>
+
+    fun listActiveMovies() =
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        if (numberOfActiveMovies() == 0) &quot;No active Movies stored&quot;</span>
+<span class="nc bnc" id="L63" title="All 4 branches missed.">        else formatListString(Movies.filter { Movie -&gt; !Movie.isMovieArchived })</span>
+
+    fun listArchivedMovies() =
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        if (numberOfArchivedMovies() == 0) &quot;No archived Movies stored&quot;</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        else formatListString(Movies.filter { Movie -&gt; Movie.isMovieArchived })</span>
+
+    // ----------------------------------------------
+    //  COUNTING METHODS FOR Movie ArrayList
+    // ----------------------------------------------
+<span class="nc" id="L72">    fun numberOfMovies() = Movies.size</span>
+<span class="nc bnc" id="L73" title="All 4 branches missed.">    fun numberOfArchivedMovies(): Int = Movies.count { Movie: Movie -&gt; Movie.isMovieArchived }</span>
+<span class="nc bnc" id="L74" title="All 6 branches missed.">    fun numberOfActiveMovies(): Int = Movies.count { Movie: Movie -&gt; !Movie.isMovieArchived }</span>
+
+    // ----------------------------------------------
+    //  SEARCHING METHODS
+    // ---------------------------------------------
+<span class="nc bnc" id="L79" title="All 6 branches missed.">    fun findMovie(MovieId: Int) = Movies.find { Movie -&gt; Movie.MovieId == MovieId }</span>
+
+    fun searchMoviesByTitle(searchString: String) =
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        formatListString(Movies.filter { Movie -&gt; Movie.MovieTitle.contains(searchString, ignoreCase = true) })</span>
+
+    // ----------------------------------------------
+    //  LISTING METHODS FOR Description
+    // ----------------------------------------------
+    fun listToDoDescriptions(): String =
+<span class="nc bnc" id="L88" title="All 2 branches missed.">        if (numberOfMovies() == 0) &quot;No Movies stored&quot;</span>
+        else {
+<span class="nc" id="L90">            var listOfTodoDescription = &quot;&quot;</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">            for (Movie in Movies) {</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">                for (description in Movie.descriptions) {</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">                    if (!description.isDescriptionComplete) {</span>
+<span class="nc" id="L94">                        listOfTodoDescription += Movie.MovieTitle + &quot;: &quot; + description.descriptionContents + &quot;\n&quot;</span>
+                    }
+                }
+            }
+<span class="nc" id="L98">            listOfTodoDescription</span>
+<span class="nc" id="L99">        }</span>
+
+    // ----------------------------------------------
+    //  COUNTING METHODS FOR ITEMS
+    // ----------------------------------------------
+    fun numberOfToDoDescriptions(): Int {
+<span class="nc" id="L105">        var numberOfToDoDescriptions = 0</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">        for (Movie in Movies) {</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">            for (description in Movie.descriptions) {</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">                if (!description.isDescriptionComplete) {</span>
+<span class="nc" id="L109">                    numberOfToDoDescriptions++</span>
+                }
+            }
+        }
+<span class="nc" id="L113">        return numberOfToDoDescriptions</span>
+    }
+
+    fun searchDescriptionByContents(searchString: String): String {
+<span class="nc bnc" id="L117" title="All 2 branches missed.">        return if (numberOfMovies() == 0) &quot;No Movies stored&quot;</span>
+        else {
+<span class="nc" id="L119">            var listOfMovies = &quot;&quot;</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">            for (Movie in Movies) {</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">                for (description in Movie.descriptions) {</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">                    if (description.descriptionContents.contains(searchString, ignoreCase = true)) {</span>
+<span class="nc" id="L123">                        listOfMovies += &quot;${Movie.MovieId}: ${Movie.MovieTitle} \n\t${description}\n&quot;</span>
+                    }
+                }
+            }
+<span class="nc bnc" id="L127" title="All 2 branches missed.">            if (listOfMovies == &quot;&quot;) &quot;No description found for: $searchString&quot;</span>
+<span class="nc" id="L128">            else listOfMovies</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

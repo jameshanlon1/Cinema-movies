@@ -68,9 +68,9 @@ fun mainMenu() = readNextInt(
          > ==>> """.trimMargin(">")
 )
 
-//------------------------------------
-//Movie MENU
-//------------------------------------
+// ------------------------------------
+// Movie MENU
+// ------------------------------------
 fun addMovie() {
     val MovieTitle = readNextLine("Enter a title for the Movie: ")
     val MoviePriority = readNextInt("Enter a priority (1-low, 2, 3, 4, 5-high): ")
@@ -122,7 +122,7 @@ fun updateMovie() {
             val MovieCategory = readNextLine("Enter a category for the Movie: ")
 
             // pass the index of the Movie and the new Movie details to MovieAPI for updating and check for success.
-            if (MovieAPI.update(id, Movie(0, MovieTitle, MoviePriority, MovieCategory, false))){
+            if (MovieAPI.update(id, Movie(0, MovieTitle, MoviePriority, MovieCategory, false))) {
                 println("Update Successful")
             } else {
                 println("Update Failed")
@@ -162,15 +162,15 @@ fun archiveMovie() {
     }
 }
 
-//-------------------------------------------
-//description MENU (only available for active Movies)
-//-------------------------------------------
+// -------------------------------------------
+// description MENU (only available for active Movies)
+// -------------------------------------------
 
-//TODO
+// TODO
 
-//------------------------------------
-//Movie REPORTS MENU
-//------------------------------------
+// ------------------------------------
+// Movie REPORTS MENU
+// ------------------------------------
 fun searchMovies() {
     val searchTitle = readNextLine("Enter the description to search by: ")
     val searchResults = MovieAPI.searchMoviesByTitle(searchTitle)
@@ -181,23 +181,23 @@ fun searchMovies() {
     }
 }
 
-//------------------------------------
-//description REPORTS MENU
-//------------------------------------
+// ------------------------------------
+// description REPORTS MENU
+// ------------------------------------
 
-//TODO
+// TODO
 
-//------------------------------------
+// ------------------------------------
 // Exit App
-//------------------------------------
+// ------------------------------------
 fun exitApp() {
     println("Exiting...bye")
     exitProcess(0)
 }
 
-//------------------------------------
-//HELPER FUNCTIONS
-//------------------------------------
+// ------------------------------------
+// HELPER FUNCTIONS
+// ------------------------------------
 
 private fun askUserToChooseActiveMovie(): Movie? {
     listActiveMovies()
@@ -207,13 +207,13 @@ private fun askUserToChooseActiveMovie(): Movie? {
             if (Movie.isMovieArchived) {
                 println("Movie is NOT Active, it is Archived")
             } else {
-                return Movie //chosen Movie is active
+                return Movie // chosen Movie is active
             }
         } else {
             println("Movie id is not valid")
         }
     }
-    return null //selected Movie is not active
+    return null // selected Movie is not active
 }
 
 private fun addDescriptionToMovie() {
@@ -246,9 +246,8 @@ private fun askUserToChooseDescription(Movie: Movie): Description? {
     if (Movie.numberOfDescriptions() > 0) {
         print(Movie.listDescriptions())
         return Movie.findOne(readNextInt("\nEnter the id of the description: "))
-    }
-    else{
-        println ("No descriptions for chosen Movie")
+    } else {
+        println("No descriptions for chosen Movie")
         return null
     }
 }
@@ -276,12 +275,11 @@ fun markdescriptionStatus() {
             var changeStatus = 'X'
             if (description.isDescriptionComplete) {
                 changeStatus = readNextChar("The description is currently complete...do you want to mark it as TODO?")
-                if ((changeStatus == 'Y') ||  (changeStatus == 'y'))
+                if ((changeStatus == 'Y') || (changeStatus == 'y'))
                     description.isDescriptionComplete = false
-            }
-            else {
+            } else {
                 changeStatus = readNextChar("The description is currently TODO...do you want to mark it as Complete?")
-                if ((changeStatus == 'Y') ||  (changeStatus == 'y'))
+                if ((changeStatus == 'Y') || (changeStatus == 'y'))
                     description.isDescriptionComplete = true
             }
         }
@@ -298,9 +296,7 @@ fun searchdescriptions() {
     }
 }
 
-
-
-fun listToDoDescriptions(){
+fun listToDoDescriptions() {
     if (MovieAPI.numberOfToDoDescriptions() > 0) {
         println("Total TODO descriptions: ${MovieAPI.numberOfToDoDescriptions()}")
     }

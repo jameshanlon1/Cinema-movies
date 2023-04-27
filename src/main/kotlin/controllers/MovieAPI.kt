@@ -1,6 +1,5 @@
 package controllers
 
-import models.Description
 import models.Movie
 import utils.Utilities.formatListString
 import java.util.ArrayList
@@ -43,9 +42,9 @@ class MovieAPI() {
 
     fun archiveMovie(id: Int): Boolean {
         val foundMovie = findMovie(id)
-        if (( foundMovie != null) && (!foundMovie.isMovieArchived)
-        //  && ( foundMovie.checkMovieCompletionStatus())
-        ){
+        if ((foundMovie != null) && (!foundMovie.isMovieArchived)
+            //  && ( foundMovie.checkMovieCompletionStatus())
+        ) {
             foundMovie.isMovieArchived = true
             return true
         }
@@ -77,11 +76,10 @@ class MovieAPI() {
     // ----------------------------------------------
     //  SEARCHING METHODS
     // ---------------------------------------------
-    fun findMovie(MovieId : Int) =  Movies.find{ Movie -> Movie.MovieId == MovieId }
+    fun findMovie(MovieId: Int) = Movies.find { Movie -> Movie.MovieId == MovieId }
 
     fun searchMoviesByTitle(searchString: String) =
         formatListString(Movies.filter { Movie -> Movie.MovieTitle.contains(searchString, ignoreCase = true) })
-
 
     // ----------------------------------------------
     //  LISTING METHODS FOR Description
@@ -115,7 +113,6 @@ class MovieAPI() {
         return numberOfToDoDescriptions
     }
 
-
     fun searchDescriptionByContents(searchString: String): String {
         return if (numberOfMovies() == 0) "No Movies stored"
         else {
@@ -132,4 +129,3 @@ class MovieAPI() {
         }
     }
 }
-
