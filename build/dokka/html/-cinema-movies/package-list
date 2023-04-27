@@ -1,0 +1,75 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:////PointingToDeclaration/-cinema-movies/[root]/index.html
+$dokka.location://addMovie/#/PointingToDeclaration/-cinema-movies/[root]/add-movie.html
+$dokka.location://archiveMovie/#/PointingToDeclaration/-cinema-movies/[root]/archive-movie.html
+$dokka.location://deleteAndescription/#/PointingToDeclaration/-cinema-movies/[root]/delete-andescription.html
+$dokka.location://deleteMovie/#/PointingToDeclaration/-cinema-movies/[root]/delete-movie.html
+$dokka.location://exitApp/#/PointingToDeclaration/-cinema-movies/[root]/exit-app.html
+$dokka.location://listActiveMovies/#/PointingToDeclaration/-cinema-movies/[root]/list-active-movies.html
+$dokka.location://listAllMovies/#/PointingToDeclaration/-cinema-movies/[root]/list-all-movies.html
+$dokka.location://listArchivedMovies/#/PointingToDeclaration/-cinema-movies/[root]/list-archived-movies.html
+$dokka.location://listMovies/#/PointingToDeclaration/-cinema-movies/[root]/list-movies.html
+$dokka.location://listToDoDescriptions/#/PointingToDeclaration/-cinema-movies/[root]/list-to-do-descriptions.html
+$dokka.location://main/#/PointingToDeclaration/-cinema-movies/[root]/main.html
+$dokka.location://mainMenu/#/PointingToDeclaration/-cinema-movies/[root]/main-menu.html
+$dokka.location://markdescriptionStatus/#/PointingToDeclaration/-cinema-movies/[root]/markdescription-status.html
+$dokka.location://runMenu/#/PointingToDeclaration/-cinema-movies/[root]/run-menu.html
+$dokka.location://searchMovies/#/PointingToDeclaration/-cinema-movies/[root]/search-movies.html
+$dokka.location://searchdescriptions/#/PointingToDeclaration/-cinema-movies/[root]/searchdescriptions.html
+$dokka.location://updateDescriptionContentsInMovie/#/PointingToDeclaration/-cinema-movies/[root]/update-description-contents-in-movie.html
+$dokka.location://updateMovie/#/PointingToDeclaration/-cinema-movies/[root]/update-movie.html
+$dokka.location:controllers////PointingToDeclaration/-cinema-movies/controllers/index.html
+$dokka.location:controllers/MovieAPI///PointingToDeclaration/-cinema-movies/controllers/-movie-a-p-i/index.html
+$dokka.location:controllers/MovieAPI/MovieAPI/#/PointingToDeclaration/-cinema-movies/controllers/-movie-a-p-i/-movie-a-p-i.html
+$dokka.location:controllers/MovieAPI/add/#models.Movie/PointingToDeclaration/-cinema-movies/controllers/-movie-a-p-i/add.html
+$dokka.location:controllers/MovieAPI/archiveMovie/#kotlin.Int/PointingToDeclaration/-cinema-movies/controllers/-movie-a-p-i/archive-movie.html
+$dokka.location:controllers/MovieAPI/delete/#kotlin.Int/PointingToDeclaration/-cinema-movies/controllers/-movie-a-p-i/delete.html
+$dokka.location:controllers/MovieAPI/findMovie/#kotlin.Int/PointingToDeclaration/-cinema-movies/controllers/-movie-a-p-i/find-movie.html
+$dokka.location:controllers/MovieAPI/listActiveMovies/#/PointingToDeclaration/-cinema-movies/controllers/-movie-a-p-i/list-active-movies.html
+$dokka.location:controllers/MovieAPI/listAllMovies/#/PointingToDeclaration/-cinema-movies/controllers/-movie-a-p-i/list-all-movies.html
+$dokka.location:controllers/MovieAPI/listArchivedMovies/#/PointingToDeclaration/-cinema-movies/controllers/-movie-a-p-i/list-archived-movies.html
+$dokka.location:controllers/MovieAPI/listToDoDescriptions/#/PointingToDeclaration/-cinema-movies/controllers/-movie-a-p-i/list-to-do-descriptions.html
+$dokka.location:controllers/MovieAPI/numberOfActiveMovies/#/PointingToDeclaration/-cinema-movies/controllers/-movie-a-p-i/number-of-active-movies.html
+$dokka.location:controllers/MovieAPI/numberOfArchivedMovies/#/PointingToDeclaration/-cinema-movies/controllers/-movie-a-p-i/number-of-archived-movies.html
+$dokka.location:controllers/MovieAPI/numberOfMovies/#/PointingToDeclaration/-cinema-movies/controllers/-movie-a-p-i/number-of-movies.html
+$dokka.location:controllers/MovieAPI/numberOfToDoDescriptions/#/PointingToDeclaration/-cinema-movies/controllers/-movie-a-p-i/number-of-to-do-descriptions.html
+$dokka.location:controllers/MovieAPI/searchDescriptionByContents/#kotlin.String/PointingToDeclaration/-cinema-movies/controllers/-movie-a-p-i/search-description-by-contents.html
+$dokka.location:controllers/MovieAPI/searchMoviesByTitle/#kotlin.String/PointingToDeclaration/-cinema-movies/controllers/-movie-a-p-i/search-movies-by-title.html
+$dokka.location:controllers/MovieAPI/update/#kotlin.Int#models.Movie?/PointingToDeclaration/-cinema-movies/controllers/-movie-a-p-i/update.html
+$dokka.location:models////PointingToDeclaration/-cinema-movies/models/index.html
+$dokka.location:models/Description///PointingToDeclaration/-cinema-movies/models/-description/index.html
+$dokka.location:models/Description/Description/#kotlin.Int#kotlin.String#kotlin.Boolean/PointingToDeclaration/-cinema-movies/models/-description/-description.html
+$dokka.location:models/Description/descriptionContents/#/PointingToDeclaration/-cinema-movies/models/-description/description-contents.html
+$dokka.location:models/Description/descriptionId/#/PointingToDeclaration/-cinema-movies/models/-description/description-id.html
+$dokka.location:models/Description/isDescriptionComplete/#/PointingToDeclaration/-cinema-movies/models/-description/is-description-complete.html
+$dokka.location:models/Description/toString/#/PointingToDeclaration/-cinema-movies/models/-description/to-string.html
+$dokka.location:models/Movie///PointingToDeclaration/-cinema-movies/models/-movie/index.html
+$dokka.location:models/Movie/Movie/#kotlin.Int#kotlin.String#kotlin.Int#kotlin.String#kotlin.Boolean#kotlin.collections.MutableSet[models.Description]/PointingToDeclaration/-cinema-movies/models/-movie/-movie.html
+$dokka.location:models/Movie/MovieCategory/#/PointingToDeclaration/-cinema-movies/models/-movie/-movie-category.html
+$dokka.location:models/Movie/MovieId/#/PointingToDeclaration/-cinema-movies/models/-movie/-movie-id.html
+$dokka.location:models/Movie/MoviePriority/#/PointingToDeclaration/-cinema-movies/models/-movie/-movie-priority.html
+$dokka.location:models/Movie/MovieTitle/#/PointingToDeclaration/-cinema-movies/models/-movie/-movie-title.html
+$dokka.location:models/Movie/addDescription/#models.Description/PointingToDeclaration/-cinema-movies/models/-movie/add-description.html
+$dokka.location:models/Movie/checkNoteCompletionStatus/#/PointingToDeclaration/-cinema-movies/models/-movie/check-note-completion-status.html
+$dokka.location:models/Movie/delete/#kotlin.Int/PointingToDeclaration/-cinema-movies/models/-movie/delete.html
+$dokka.location:models/Movie/descriptions/#/PointingToDeclaration/-cinema-movies/models/-movie/descriptions.html
+$dokka.location:models/Movie/findOne/#kotlin.Int/PointingToDeclaration/-cinema-movies/models/-movie/find-one.html
+$dokka.location:models/Movie/isMovieArchived/#/PointingToDeclaration/-cinema-movies/models/-movie/is-movie-archived.html
+$dokka.location:models/Movie/listDescriptions/#/PointingToDeclaration/-cinema-movies/models/-movie/list-descriptions.html
+$dokka.location:models/Movie/numberOfDescriptions/#/PointingToDeclaration/-cinema-movies/models/-movie/number-of-descriptions.html
+$dokka.location:models/Movie/toString/#/PointingToDeclaration/-cinema-movies/models/-movie/to-string.html
+$dokka.location:models/Movie/update/#kotlin.Int#models.Description/PointingToDeclaration/-cinema-movies/models/-movie/update.html
+$dokka.location:utils////PointingToDeclaration/-cinema-movies/utils/index.html
+$dokka.location:utils/ScannerInput///PointingToDeclaration/-cinema-movies/utils/-scanner-input/index.html
+$dokka.location:utils/ScannerInput/readNextChar/#kotlin.String?/PointingToDeclaration/-cinema-movies/utils/-scanner-input/read-next-char.html
+$dokka.location:utils/ScannerInput/readNextDouble/#kotlin.String?/PointingToDeclaration/-cinema-movies/utils/-scanner-input/read-next-double.html
+$dokka.location:utils/ScannerInput/readNextInt/#kotlin.String?/PointingToDeclaration/-cinema-movies/utils/-scanner-input/read-next-int.html
+$dokka.location:utils/ScannerInput/readNextLine/#kotlin.String?/PointingToDeclaration/-cinema-movies/utils/-scanner-input/read-next-line.html
+$dokka.location:utils/Utilities///PointingToDeclaration/-cinema-movies/utils/-utilities/index.html
+$dokka.location:utils/Utilities/formatListString/#kotlin.collections.List[models.Movie]/PointingToDeclaration/-cinema-movies/utils/-utilities/format-list-string.html
+$dokka.location:utils/Utilities/formatSetString/#kotlin.collections.Set[models.Description]/PointingToDeclaration/-cinema-movies/utils/-utilities/format-set-string.html
+controllers
+models
+utils
+
