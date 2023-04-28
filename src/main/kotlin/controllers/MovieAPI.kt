@@ -1,11 +1,14 @@
 package controllers
 
+import Persistence.Serializer
 import models.Description
 import models.Movie
 import utils.Utilities.formatListString
 import java.util.ArrayList
 
-class MovieAPI() {
+class MovieAPI(serializerType: Serializer) {
+
+    private var serializer: Serializer = serializerType
 
     private var Movies = ArrayList<Movie>()
 
@@ -131,5 +134,16 @@ class MovieAPI() {
             else listOfMovies
         }
     }
+
+    @Throws(Exception::class)
+    fun load() {
+        Movies = serializer.read() as ArrayList<Movie>
+    }
+
+    @Throws(Exception::class)
+    fun store() {
+        serializer.write(Movies)
+    }
+
 }
 
