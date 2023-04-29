@@ -2,6 +2,7 @@ package Persistence
 
 import com.thoughtworks.xstream.XStream
 import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver
+import models.Actor
 import models.Movie
 import java.io.File
 import java.io.FileReader
@@ -12,6 +13,7 @@ class JSONSerializer(private val file: File) : Serializer {
     override fun read(): Any {
         val xStream = XStream(JettisonMappedXmlDriver())
         xStream.allowTypes(arrayOf(Movie::class.java))
+        xStream.allowTypes(arrayOf(Actor::class.java))
         val inputStream = xStream.createObjectInputStream(FileReader(file))
         val obj = inputStream.readObject() as Any
         inputStream.close()
