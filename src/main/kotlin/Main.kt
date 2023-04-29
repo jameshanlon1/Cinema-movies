@@ -49,18 +49,18 @@ fun mainMenu() = readNextInt(
          > |   4) Delete a Movie                                |
          > |   5) Add To Cinema                               |
          > -----------------------------------------------------  
-         > | actor MENU                                         | 
+         > | Actor MENU                                         | 
          > |   6) Add Actor to a Movie                           |
-         > |   7) Update Actor contents on a Movie               |
+         > |   7) Update Actor Actor on a Movie               |
          > |   8) Delete Actor from a Movie                      |
-         > |   9) Mark Actor as complete/todo                   | 
+         > |   9) Mark Actor as Oscar Winner or Not                | 
          > -----------------------------------------------------  
          > | Search MENU FOR Movies                             | 
          > |   10) Search for all Movies (by Movie title)        |
          > -----------------------------------------------------  
-         > | REPORT MENU FOR actorS                             |                                
+         > | REPORT MENU FOR Actors                             |                                
          > |   11) Search for all Actor (by Actor Name)  |
-         > |   12) List TODO Actor                             |
+         > |   12) List Oscar Winning Actors                           |
          > |   20) Save                                       |
          > |   21) Load                                       |
          > -----------------------------------------------------  
@@ -74,9 +74,9 @@ fun mainMenu() = readNextInt(
 //------------------------------------
 fun addMovie() {
     val MovieTitle = readNextLine("Enter a title for the Movie: ")
-    val MoviePriority = readNextInt("Enter a priority (1-low, 2, 3, 4, 5-high): ")
+    val MovieRating = readNextInt("Enter a rating (1-low, 2, 3, 4, 5-high): ")
     val MovieCategory = readNextLine("Enter a category for the Movie: ")
-    val isAdded = MovieAPI.add(Movie(MovieTitle = MovieTitle, MoviePriority = MoviePriority, MovieCategory = MovieCategory))
+    val isAdded = MovieAPI.add(Movie(MovieTitle = MovieTitle, MovieRating = MovieRating, MovieCategory = MovieCategory))
 
     if (isAdded) {
         println("Added Successfully")
@@ -91,8 +91,8 @@ fun listMovies() {
             """
                   > --------------------------------
                   > |   1) View ALL Movies          |
-                  > |   2) View ACTIVE Movies       |
-                  > |   3) View ARCHIVED Movies     |
+                  > |   2) View Cinema Movies       |
+                  > |   3) View Out of Cinema Movies     |
                   > --------------------------------
          > ==>> """.trimMargin(">")
         )
@@ -205,7 +205,7 @@ private fun askUserToChooseActiveMovie(): Movie? {
     if (MovieAPI.numberOfActiveMovies() > 0) {
         val Movie = MovieAPI.findMovie(readNextInt("\nEnter the id of the Movie: "))
         if (Movie != null) {
-            if (Movie.isMovieArchived) {
+            if (Movie.isMovieInCinema) {
                 println("Movie is NOT Active, it is Archived")
             } else {
                 return Movie //chosen Movie is active
