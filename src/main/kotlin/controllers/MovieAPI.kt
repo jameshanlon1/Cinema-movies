@@ -104,7 +104,7 @@ class MovieAPI(serializerType: Serializer) {
         }
 
     // ----------------------------------------------
-    //  COUNTING METHODS FOR ITEMS
+    //  COUNTING METHODS FOR Description
     // ----------------------------------------------
     fun numberOfToDoDescriptions(): Int {
         var numberOfToDoDescriptions = 0
