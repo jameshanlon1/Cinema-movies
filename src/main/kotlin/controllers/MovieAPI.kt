@@ -88,7 +88,7 @@ class MovieAPI(serializerType: Serializer) {
     // ----------------------------------------------
     //  LISTING METHODS FOR actor
     // ----------------------------------------------
-    fun listToDoactors(): String =
+    fun listToDoActors(): String =
         if (numberOfMovies() == 0) "No Movies stored"
         else {
             var listOfTodoactor = ""
@@ -105,7 +105,7 @@ class MovieAPI(serializerType: Serializer) {
     // ----------------------------------------------
     //  COUNTING METHODS FOR actor
     // ----------------------------------------------
-    fun numberOfToDoactors(): Int {
+    fun numberOfToDoActors(): Int {
         var numberOfToDoactors = 0
         for (Movie in Movies) {
             for (actor in Movie.actors) {
@@ -118,7 +118,7 @@ class MovieAPI(serializerType: Serializer) {
     }
 
 
-    fun searchactorByContents(searchString: String): String {
+    fun searchActorByContents(searchString: String): String {
         return if (numberOfMovies() == 0) "No Movies stored"
         else {
             var listOfMovies = ""
