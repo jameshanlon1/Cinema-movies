@@ -27,8 +27,8 @@ fun runMenu() {
             8 -> deleteActor()
             9 -> markActorStatus()
             10 -> searchMovies()
-            15 -> searchActors()
-            16 -> listToDoActors()
+            11 -> searchActors()
+            12 -> listToDoActors()
             20  ->save()
             21  ->load()
             0 -> exitApp()
@@ -40,7 +40,7 @@ fun runMenu() {
 fun mainMenu() = readNextInt(
     """ 
          > -----------------------------------------------------  
-         > |                  Movie KEEPER APP                  |
+         > |                  Cinema APP                        |
          > -----------------------------------------------------  
          > | Movie MENU                                         |
          > |   1) Add a Movie                                   |
@@ -55,17 +55,12 @@ fun mainMenu() = readNextInt(
          > |   8) Delete Actor from a Movie                      |
          > |   9) Mark Actor as complete/todo                   | 
          > -----------------------------------------------------  
-         > | REPORT MENU FOR MovieS                             | 
+         > | Search MENU FOR Movies                             | 
          > |   10) Search for all Movies (by Movie title)        |
-         > |   11) .....                                       |
-         > |   12) .....                                       |
-         > |   13) .....                                       |
-         > |   14) .....                                       |
          > -----------------------------------------------------  
          > | REPORT MENU FOR actorS                             |                                
-         > |   15) Search for all Actor (by Actor Name)  |
-         > |   16) List TODO Actor                             |
-         > |   17) .....                                       |
+         > |   11) Search for all Actor (by Actor Name)  |
+         > |   12) List TODO Actor                             |
          > |   20) Save                                       |
          > |   21) Load                                       |
          > -----------------------------------------------------  
