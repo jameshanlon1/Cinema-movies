@@ -201,7 +201,7 @@ fun exitApp() {
 //------------------------------------
 
 private fun askUserToChooseCinemaMovie(): Movie? {
-    listActiveMovies()
+    listAllMovies()
     if (MovieAPI.numberOfMovies() > 0) {
         val Movie = MovieAPI.findMovie(readNextInt("\nEnter the id of the Movie: "))
         if (Movie != null) {
@@ -216,7 +216,7 @@ private fun askUserToChooseCinemaMovie(): Movie? {
 private fun addActorToMovie() {
     val Movie: Movie? = askUserToChooseCinemaMovie()
     if (Movie != null) {
-        if (Movie.addActor(Actor(actorName = readNextLine("\t actor Contents: "))))
+        if (Movie.addActor(Actor(actorName = readNextLine("\t Actor Name: "))))
             println("Add Successful!")
         else println("Add NOT Successful")
     }
@@ -227,11 +227,11 @@ fun updateActorsInMovie() {
     if (Movie != null) {
         val actor: Actor? = askUserToChooseActor(Movie)
         if (actor != null) {
-            val newContents = readNextLine("Enter new contents: ")
-            if (Movie.update(actor.actorId, Actor(actorName = newContents))) {
-                println("actor contents updated")
+            val newName = readNextLine("Enter new Actor: ")
+            if (Movie.update(actor.actorId, Actor(actorName = newName))) {
+                println("Actor name updated")
             } else {
-                println("actor contents NOT updated")
+                println("actor name NOT updated")
             }
         } else {
             println("Invalid actor Id")
@@ -299,7 +299,7 @@ fun searchActors() {
 
 fun listNotOscarActors(){
     if (MovieAPI.numberOfToDoActors() > 0) {
-        println("Total Not Oscar winners actors: ${MovieAPI.numberOfToDoActors()}")
+        println("Total Oscar winners actors: ${MovieAPI.numberOfToDoActors()}")
     }
     println(MovieAPI.listToDoActors())
 }
