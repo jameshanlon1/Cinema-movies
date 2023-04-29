@@ -28,7 +28,7 @@ fun runMenu() {
             9 -> markActorStatus()
             10 -> searchMovies()
             11 -> searchActors()
-            12 -> listToDoActors()
+            12 -> listNotOscarActors()
             20  ->save()
             21  ->load()
             0 -> exitApp()
@@ -49,18 +49,18 @@ fun mainMenu() = readNextInt(
          > |   4) Delete a Movie                                |
          > |   5) Add To Cinema                               |
          > -----------------------------------------------------  
-         > | actor MENU                                         | 
+         > | Actor MENU                                         | 
          > |   6) Add Actor to a Movie                           |
-         > |   7) Update Actor contents on a Movie               |
+         > |   7) Update Actor Actor on a Movie               |
          > |   8) Delete Actor from a Movie                      |
-         > |   9) Mark Actor as complete/todo                   | 
+         > |   9) Mark Actor as Oscar Winner or Not                | 
          > -----------------------------------------------------  
          > | Search MENU FOR Movies                             | 
          > |   10) Search for all Movies (by Movie title)        |
          > -----------------------------------------------------  
-         > | REPORT MENU FOR actorS                             |                                
+         > | REPORT MENU FOR Actors                             |                                
          > |   11) Search for all Actor (by Actor Name)  |
-         > |   12) List TODO Actor                             |
+         > |   12) List Oscar Winning Actors                           |
          > |   20) Save                                       |
          > |   21) Load                                       |
          > -----------------------------------------------------  
@@ -74,9 +74,9 @@ fun mainMenu() = readNextInt(
 //------------------------------------
 fun addMovie() {
     val MovieTitle = readNextLine("Enter a title for the Movie: ")
-    val MoviePriority = readNextInt("Enter a priority (1-low, 2, 3, 4, 5-high): ")
+    val MovieRating = readNextInt("Enter a rating (1-low, 2, 3, 4, 5-high): ")
     val MovieCategory = readNextLine("Enter a category for the Movie: ")
-    val isAdded = MovieAPI.add(Movie(MovieTitle = MovieTitle, MoviePriority = MoviePriority, MovieCategory = MovieCategory))
+    val isAdded = MovieAPI.add(Movie(MovieTitle = MovieTitle, MovieRating = MovieRating, MovieCategory = MovieCategory))
 
     if (isAdded) {
         println("Added Successfully")
@@ -91,8 +91,8 @@ fun listMovies() {
             """
                   > --------------------------------
                   > |   1) View ALL Movies          |
-                  > |   2) View ACTIVE Movies       |
-                  > |   3) View ARCHIVED Movies     |
+                  > |   2) View Out of Cinema Movies       |
+                  > |   3) View Cinema Movies     |
                   > --------------------------------
          > ==>> """.trimMargin(">")
         )
@@ -119,7 +119,7 @@ fun updateMovie() {
         val id = readNextInt("Enter the id of the Movie to update: ")
         if (MovieAPI.findMovie(id) != null) {
             val MovieTitle = readNextLine("Enter a title for the Movie: ")
-            val MoviePriority = readNextInt("Enter a priority (1-low, 2, 3, 4, 5-high): ")
+            val MoviePriority = readNextInt("Enter a rating (1-low, 2, 3, 4, 5-high): ")
             val MovieCategory = readNextLine("Enter a category for the Movie: ")
 
             // pass the index of the Movie and the new Movie details to MovieAPI for updating and check for success.
@@ -151,20 +151,20 @@ fun deleteMovie() {
 
 fun cinemaMovie() {
     listActiveMovies()
-    if (MovieAPI.numberOfActiveMovies() > 0) {
+    if (MovieAPI.numberOfNotCinemaMovies() > 0) {
         // only ask the user to choose the Movie to archive if active Movies exist
-        val id = readNextInt("Enter the id of the Movie to archive: ")
+        val id = readNextInt("Enter the id of the Movie to add to cinema: ")
         // pass the index of the Movie to MovieAPI for archiving and check for success.
         if (MovieAPI.archiveMovie(id)) {
-            println("Archive Successful!")
+            println("Added Successful!")
         } else {
-            println("Archive NOT Successful")
+            println("NOT Added Successful")
         }
     }
 }
 
 //-------------------------------------------
-//actor MENU (only available for active Movies)
+//actor MENU (only available for cinema Movies)
 //-------------------------------------------
 
 //TODO
@@ -200,16 +200,12 @@ fun exitApp() {
 //HELPER FUNCTIONS
 //------------------------------------
 
-private fun askUserToChooseActiveMovie(): Movie? {
-    listActiveMovies()
-    if (MovieAPI.numberOfActiveMovies() > 0) {
+private fun askUserToChooseCinemaMovie(): Movie? {
+    listAllMovies()
+    if (MovieAPI.numberOfMovies() > 0) {
         val Movie = MovieAPI.findMovie(readNextInt("\nEnter the id of the Movie: "))
         if (Movie != null) {
-            if (Movie.isMovieArchived) {
-                println("Movie is NOT Active, it is Archived")
-            } else {
-                return Movie //chosen Movie is active
-            }
+            return Movie
         } else {
             println("Movie id is not valid")
         }
@@ -218,24 +214,24 @@ private fun askUserToChooseActiveMovie(): Movie? {
 }
 
 private fun addActorToMovie() {
-    val Movie: Movie? = askUserToChooseActiveMovie()
+    val Movie: Movie? = askUserToChooseCinemaMovie()
     if (Movie != null) {
-        if (Movie.addActor(Actor(actorName = readNextLine("\t actor Contents: "))))
+        if (Movie.addActor(Actor(actorName = readNextLine("\t Actor Name: "))))
             println("Add Successful!")
         else println("Add NOT Successful")
     }
 }
 
 fun updateActorsInMovie() {
-    val Movie: Movie? = askUserToChooseActiveMovie()
+    val Movie: Movie? = askUserToChooseCinemaMovie()
     if (Movie != null) {
         val actor: Actor? = askUserToChooseActor(Movie)
         if (actor != null) {
-            val newContents = readNextLine("Enter new contents: ")
-            if (Movie.update(actor.actorId, Actor(actorName = newContents))) {
-                println("actor contents updated")
+            val newName = readNextLine("Enter new Actor: ")
+            if (Movie.update(actor.actorId, Actor(actorName = newName))) {
+                println("Actor name updated")
             } else {
-                println("actor contents NOT updated")
+                println("actor name NOT updated")
             }
         } else {
             println("Invalid actor Id")
@@ -255,7 +251,7 @@ private fun askUserToChooseActor(Movie: Movie): Actor? {
 }
 
 fun deleteActor() {
-    val Movie: Movie? = askUserToChooseActiveMovie()
+    val Movie: Movie? = askUserToChooseCinemaMovie()
     if (Movie != null) {
         val actor: Actor? = askUserToChooseActor(Movie)
         if (actor != null) {
@@ -270,18 +266,18 @@ fun deleteActor() {
 }
 
 fun markActorStatus() {
-    val Movie: Movie? = askUserToChooseActiveMovie()
+    val Movie: Movie? = askUserToChooseCinemaMovie()
     if (Movie != null) {
         val actor: Actor? = askUserToChooseActor(Movie)
         if (actor != null) {
             var changeStatus = 'X'
             if (actor.isActorOscar) {
-                changeStatus = readNextChar("The actor is currently complete...do you want to mark it as TODO?")
+                changeStatus = readNextChar("The actor is currently complete...do you want to mark it as Not Oscar winner?")
                 if ((changeStatus == 'Y') ||  (changeStatus == 'y'))
                     actor.isActorOscar = false
             }
             else {
-                changeStatus = readNextChar("The actor is currently TODO...do you want to mark it as Complete?")
+                changeStatus = readNextChar("The actor is currently Not oscar Winning...do you want to mark it as oscar winner?")
                 if ((changeStatus == 'Y') ||  (changeStatus == 'y'))
                     actor.isActorOscar = true
             }
@@ -290,7 +286,7 @@ fun markActorStatus() {
 }
 
 fun searchActors() {
-    val searchContents = readNextLine("Enter the actor contents to search by: ")
+    val searchContents = readNextLine("Enter the actor name to search by: ")
     val searchResults = MovieAPI.searchActorByContents(searchContents)
     if (searchResults.isEmpty()) {
         println("No actors found")
@@ -301,9 +297,9 @@ fun searchActors() {
 
 
 
-fun listToDoActors(){
+fun listNotOscarActors(){
     if (MovieAPI.numberOfToDoActors() > 0) {
-        println("Total TODO actors: ${MovieAPI.numberOfToDoActors()}")
+        println("Total Oscar winners actors: ${MovieAPI.numberOfToDoActors()}")
     }
     println(MovieAPI.listToDoActors())
 }

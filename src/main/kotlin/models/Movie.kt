@@ -4,9 +4,9 @@ import utils.Utilities
 
 data class Movie(var MovieId: Int = 0,
                 var MovieTitle: String,
-                var MoviePriority: Int,
+                var MovieRating: Int,
                 var MovieCategory: String,
-                var isMovieArchived: Boolean = false,
+                var isMovieInCinema: Boolean = false,
                 var actors : MutableSet<Actor> = mutableSetOf()){
     private var lastActorId = 0
     private fun getActorId() = lastActorId++
@@ -46,8 +46,8 @@ data class Movie(var MovieId: Int = 0,
 
 
     override fun toString(): String {
-        val archived = if (isMovieArchived) 'Y' else 'N'
-        return "$MovieId: $MovieTitle, Priority($MoviePriority), Category($MovieCategory), Archived($archived) \n${listActors()}"
+        val Cinema = if (isMovieInCinema) 'Y' else 'N'
+        return "$MovieId: $MovieTitle, rating($MovieRating), Category($MovieCategory), Cinema($Cinema) \n${listActors()}"
     }
 
 
