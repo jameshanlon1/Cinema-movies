@@ -220,7 +220,7 @@ private fun askUserToChooseActiveMovie(): Movie? {
 private fun addActorToMovie() {
     val Movie: Movie? = askUserToChooseActiveMovie()
     if (Movie != null) {
-        if (Movie.addActor(Actor(actorContents = readNextLine("\t actor Contents: "))))
+        if (Movie.addActor(Actor(actorName = readNextLine("\t actor Contents: "))))
             println("Add Successful!")
         else println("Add NOT Successful")
     }
@@ -232,7 +232,7 @@ fun updateActorsInMovie() {
         val actor: Actor? = askUserToChooseActor(Movie)
         if (actor != null) {
             val newContents = readNextLine("Enter new contents: ")
-            if (Movie.update(actor.actorId, Actor(actorContents = newContents))) {
+            if (Movie.update(actor.actorId, Actor(actorName = newContents))) {
                 println("actor contents updated")
             } else {
                 println("actor contents NOT updated")
@@ -275,15 +275,15 @@ fun markActorStatus() {
         val actor: Actor? = askUserToChooseActor(Movie)
         if (actor != null) {
             var changeStatus = 'X'
-            if (actor.isActorComplete) {
+            if (actor.isActorOscar) {
                 changeStatus = readNextChar("The actor is currently complete...do you want to mark it as TODO?")
                 if ((changeStatus == 'Y') ||  (changeStatus == 'y'))
-                    actor.isActorComplete = false
+                    actor.isActorOscar = false
             }
             else {
                 changeStatus = readNextChar("The actor is currently TODO...do you want to mark it as Complete?")
                 if ((changeStatus == 'Y') ||  (changeStatus == 'y'))
-                    actor.isActorComplete = true
+                    actor.isActorOscar = true
             }
         }
     }

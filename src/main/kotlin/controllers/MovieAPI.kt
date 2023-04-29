@@ -94,8 +94,8 @@ class MovieAPI(serializerType: Serializer) {
             var listOfTodoactor = ""
             for (Movie in Movies) {
                 for (actor in Movie.actors) {
-                    if (!actor.isActorComplete) {
-                        listOfTodoactor += Movie.MovieTitle + ": " + actor.actorContents + "\n"
+                    if (!actor.isActorOscar) {
+                        listOfTodoactor += Movie.MovieTitle + ": " + actor.actorName + "\n"
                     }
                 }
             }
@@ -109,7 +109,7 @@ class MovieAPI(serializerType: Serializer) {
         var numberOfToDoactors = 0
         for (Movie in Movies) {
             for (actor in Movie.actors) {
-                if (!actor.isActorComplete) {
+                if (!actor.isActorOscar) {
                     numberOfToDoactors++
                 }
             }
@@ -124,7 +124,7 @@ class MovieAPI(serializerType: Serializer) {
             var listOfMovies = ""
             for (Movie in Movies) {
                 for (actor in Movie.actors) {
-                    if (actor.actorContents.contains(searchString, ignoreCase = true)) {
+                    if (actor.actorName.contains(searchString, ignoreCase = true)) {
                         listOfMovies += "${Movie.MovieId}: ${Movie.MovieTitle} \n\t${actor}\n"
                     }
                 }
