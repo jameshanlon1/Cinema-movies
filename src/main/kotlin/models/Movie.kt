@@ -46,8 +46,8 @@ data class Movie(var MovieId: Int = 0,
 
 
     override fun toString(): String {
-        val archived = if (isMovieInCinema) 'Y' else 'N'
-        return "$MovieId: $MovieTitle, Priority($MovieRating), Category($MovieCategory), Archived($archived) \n${listActors()}"
+        val Cinema = if (isMovieInCinema) 'Y' else 'N'
+        return "$MovieId: $MovieTitle, rating($MovieRating), Category($MovieCategory), Cinema($Cinema) \n${listActors()}"
     }
 
 

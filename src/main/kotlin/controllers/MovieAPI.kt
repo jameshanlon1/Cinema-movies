@@ -62,11 +62,11 @@ class MovieAPI(serializerType: Serializer) {
         else formatListString(Movies)
 
     fun listActiveMovies() =
-        if (numberOfActiveMovies() == 0) "No active Movies stored"
+        if (numberOfNotCinemaMovies() == 0) "No Out of Cinema Movies stored"
         else formatListString(Movies.filter { Movie -> !Movie.isMovieInCinema })
 
     fun listArchivedMovies() =
-        if (numberOfArchivedMovies() == 0) "No archived Movies stored"
+        if (numberOfArchivedMovies() == 0) "No Cinema Movies stored"
         else formatListString(Movies.filter { Movie -> Movie.isMovieInCinema })
 
     // ----------------------------------------------
@@ -74,7 +74,7 @@ class MovieAPI(serializerType: Serializer) {
     // ----------------------------------------------
     fun numberOfMovies() = Movies.size
     fun numberOfArchivedMovies(): Int = Movies.count { Movie: Movie -> Movie.isMovieInCinema }
-    fun numberOfActiveMovies(): Int = Movies.count { Movie: Movie -> !Movie.isMovieInCinema }
+    fun numberOfNotCinemaMovies(): Int = Movies.count { Movie: Movie -> !Movie.isMovieInCinema }
 
     // ----------------------------------------------
     //  SEARCHING METHODS
