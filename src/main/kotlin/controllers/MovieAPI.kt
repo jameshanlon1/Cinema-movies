@@ -94,7 +94,7 @@ class MovieAPI(serializerType: Serializer) {
             var listOfTodoactor = ""
             for (Movie in Movies) {
                 for (actor in Movie.actors) {
-                    if (!actor.isactorComplete) {
+                    if (!actor.isActorComplete) {
                         listOfTodoactor += Movie.MovieTitle + ": " + actor.actorContents + "\n"
                     }
                 }
@@ -109,7 +109,7 @@ class MovieAPI(serializerType: Serializer) {
         var numberOfToDoactors = 0
         for (Movie in Movies) {
             for (actor in Movie.actors) {
-                if (!actor.isactorComplete) {
+                if (!actor.isActorComplete) {
                     numberOfToDoactors++
                 }
             }

@@ -1,11 +1,11 @@
 package models
 
-data class Actor (var actorId: Int = 0, var actorContents : String, var isActorComplete: Boolean = false){
+data class Actor (var actorId: Int = 0, var actorName : String, var isActorOscar: Boolean = false){
 
     override fun toString() =
-        if (isActorComplete)
-            "$actorId: $actorContents (Complete)"
+        if (isActorOscar)
+            "$actorId: $actorName (Oscar Winner)"
         else
-            "$actorId: $actorContents (TODO)"
+            "$actorId: $actorName (Not Oscar Winner)"
 
 }
