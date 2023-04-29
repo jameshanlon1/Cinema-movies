@@ -220,7 +220,7 @@ private fun askUserToChooseActiveMovie(): Movie? {
 private fun addActorToMovie() {
     val Movie: Movie? = askUserToChooseActiveMovie()
     if (Movie != null) {
-        if (Movie.addActor(Actor(actorContents = readNextLine("\t actor Contents: "))))
+        if (Movie.addActor(Actor(actorName = readNextLine("\t actor Contents: "))))
             println("Add Successful!")
         else println("Add NOT Successful")
     }
@@ -232,7 +232,7 @@ fun updateActorsInMovie() {
         val actor: Actor? = askUserToChooseActor(Movie)
         if (actor != null) {
             val newContents = readNextLine("Enter new contents: ")
-            if (Movie.update(actor.actorId, Actor(actorContents = newContents))) {
+            if (Movie.update(actor.actorId, Actor(actorName = newContents))) {
                 println("actor contents updated")
             } else {
                 println("actor contents NOT updated")
@@ -275,15 +275,15 @@ fun markActorStatus() {
         val actor: Actor? = askUserToChooseActor(Movie)
         if (actor != null) {
             var changeStatus = 'X'
-            if (actor.isActorComplete) {
+            if (actor.isActorOscar) {
                 changeStatus = readNextChar("The actor is currently complete...do you want to mark it as TODO?")
                 if ((changeStatus == 'Y') ||  (changeStatus == 'y'))
-                    actor.isActorComplete = false
+                    actor.isActorOscar = false
             }
             else {
                 changeStatus = readNextChar("The actor is currently TODO...do you want to mark it as Complete?")
                 if ((changeStatus == 'Y') ||  (changeStatus == 'y'))
-                    actor.isActorComplete = true
+                    actor.isActorOscar = true
             }
         }
     }
@@ -291,7 +291,7 @@ fun markActorStatus() {
 
 fun searchActors() {
     val searchContents = readNextLine("Enter the actor contents to search by: ")
-    val searchResults = MovieAPI.searchactorByContents(searchContents)
+    val searchResults = MovieAPI.searchActorByContents(searchContents)
     if (searchResults.isEmpty()) {
         println("No actors found")
     } else {
@@ -302,10 +302,10 @@ fun searchActors() {
 
 
 fun listToDoActors(){
-    if (MovieAPI.numberOfToDoactors() > 0) {
-        println("Total TODO actors: ${MovieAPI.numberOfToDoactors()}")
+    if (MovieAPI.numberOfToDoActors() > 0) {
+        println("Total TODO actors: ${MovieAPI.numberOfToDoActors()}")
     }
-    println(MovieAPI.listToDoactors())
+    println(MovieAPI.listToDoActors())
 }
 
 fun save() {

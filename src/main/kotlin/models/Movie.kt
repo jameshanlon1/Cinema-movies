@@ -31,8 +31,8 @@ data class Movie(var MovieId: Int = 0,
         //if the object exists, use the details passed in the newActor parameter to
         //update the found object in the Set
         if (foundActor != null){
-            foundActor.actorContents = newActor.actorContents
-            foundActor.isActorComplete = newActor.isActorComplete
+            foundActor.actorName = newActor.actorName
+            foundActor.isActorOscar = newActor.isActorOscar
             return true
         }
 
@@ -54,7 +54,7 @@ data class Movie(var MovieId: Int = 0,
     fun checkMovieCompletionStatus(): Boolean {
         if (actors.isNotEmpty()) {
             for (Actor in actors) {
-                if (!Actor.isActorComplete) {
+                if (!Actor.isActorOscar) {
                     return false
                 }
             }

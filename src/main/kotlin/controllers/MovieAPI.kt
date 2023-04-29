@@ -88,14 +88,14 @@ class MovieAPI(serializerType: Serializer) {
     // ----------------------------------------------
     //  LISTING METHODS FOR actor
     // ----------------------------------------------
-    fun listToDoactors(): String =
+    fun listToDoActors(): String =
         if (numberOfMovies() == 0) "No Movies stored"
         else {
             var listOfTodoactor = ""
             for (Movie in Movies) {
                 for (actor in Movie.actors) {
-                    if (!actor.isactorComplete) {
-                        listOfTodoactor += Movie.MovieTitle + ": " + actor.actorContents + "\n"
+                    if (!actor.isActorOscar) {
+                        listOfTodoactor += Movie.MovieTitle + ": " + actor.actorName + "\n"
                     }
                 }
             }
@@ -105,11 +105,11 @@ class MovieAPI(serializerType: Serializer) {
     // ----------------------------------------------
     //  COUNTING METHODS FOR actor
     // ----------------------------------------------
-    fun numberOfToDoactors(): Int {
+    fun numberOfToDoActors(): Int {
         var numberOfToDoactors = 0
         for (Movie in Movies) {
             for (actor in Movie.actors) {
-                if (!actor.isactorComplete) {
+                if (!actor.isActorOscar) {
                     numberOfToDoactors++
                 }
             }
@@ -118,13 +118,13 @@ class MovieAPI(serializerType: Serializer) {
     }
 
 
-    fun searchactorByContents(searchString: String): String {
+    fun searchActorByContents(searchString: String): String {
         return if (numberOfMovies() == 0) "No Movies stored"
         else {
             var listOfMovies = ""
             for (Movie in Movies) {
                 for (actor in Movie.actors) {
-                    if (actor.actorContents.contains(searchString, ignoreCase = true)) {
+                    if (actor.actorName.contains(searchString, ignoreCase = true)) {
                         listOfMovies += "${Movie.MovieId}: ${Movie.MovieTitle} \n\t${actor}\n"
                     }
                 }
