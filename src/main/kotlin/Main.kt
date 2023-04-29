@@ -23,12 +23,12 @@ fun runMenu() {
             4 -> deleteMovie()
             5 -> cinemaMovie()
             6 -> addActorToMovie()
-            7 -> updateActorContentsInMovie()
+            7 -> updateActorsInMovie()
             8 -> deleteActor()
-            9 -> markactorStatus()
+            9 -> markActorStatus()
             10 -> searchMovies()
-            15 -> searchactors()
-            16 -> listToDoactors()
+            15 -> searchActors()
+            16 -> listToDoActors()
             20  ->save()
             21  ->load()
             0 -> exitApp()
@@ -231,7 +231,7 @@ private fun addActorToMovie() {
     }
 }
 
-fun updateActorContentsInMovie() {
+fun updateActorsInMovie() {
     val Movie: Movie? = askUserToChooseActiveMovie()
     if (Movie != null) {
         val actor: Actor? = askUserToChooseActor(Movie)
@@ -274,7 +274,7 @@ fun deleteActor() {
     }
 }
 
-fun markactorStatus() {
+fun markActorStatus() {
     val Movie: Movie? = askUserToChooseActiveMovie()
     if (Movie != null) {
         val actor: Actor? = askUserToChooseActor(Movie)
@@ -294,7 +294,7 @@ fun markactorStatus() {
     }
 }
 
-fun searchactors() {
+fun searchActors() {
     val searchContents = readNextLine("Enter the actor contents to search by: ")
     val searchResults = MovieAPI.searchactorByContents(searchContents)
     if (searchResults.isEmpty()) {
@@ -306,7 +306,7 @@ fun searchactors() {
 
 
 
-fun listToDoactors(){
+fun listToDoActors(){
     if (MovieAPI.numberOfToDoactors() > 0) {
         println("Total TODO actors: ${MovieAPI.numberOfToDoactors()}")
     }
