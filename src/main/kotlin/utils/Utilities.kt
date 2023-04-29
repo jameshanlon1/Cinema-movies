@@ -1,6 +1,6 @@
 package utils
 
-import models.Description
+import models.Actor
 import models.Movie
 
 object Utilities {
@@ -14,7 +14,7 @@ object Utilities {
             .joinToString(separator = "\n") { movie ->  "$movie" }
 
     @JvmStatic
-    fun formatSetString(itemsToFormat: Set<Description>): String =
+    fun formatSetString(itemsToFormat: Set<Actor>): String =
         itemsToFormat
             .joinToString(separator = "\n") { Description ->  "\t${Description}" }
 

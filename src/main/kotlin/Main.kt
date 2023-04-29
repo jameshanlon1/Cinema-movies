@@ -1,6 +1,6 @@
 import Persistence.JSONSerializer
 import controllers.MovieAPI
-import models.Description
+import models.Actor
 import models.Movie
 import utils.ScannerInput.readNextChar
 import utils.ScannerInput.readNextInt
@@ -21,14 +21,14 @@ fun runMenu() {
             2 -> listMovies()
             3 -> updateMovie()
             4 -> deleteMovie()
-            5 -> archiveMovie()
-            6 -> addDescriptionToMovie()
-            7 -> updateDescriptionContentsInMovie()
-            8 -> deleteAndescription()
-            9 -> markdescriptionStatus()
+            5 -> cinemaMovie()
+            6 -> addActorToMovie()
+            7 -> updateActorContentsInMovie()
+            8 -> deleteActor()
+            9 -> markactorStatus()
             10 -> searchMovies()
-            15 -> searchdescriptions()
-            16 -> listToDoDescriptions()
+            15 -> searchactors()
+            16 -> listToDoactors()
             20  ->save()
             21  ->load()
             0 -> exitApp()
@@ -47,13 +47,13 @@ fun mainMenu() = readNextInt(
          > |   2) List Movies                                   |
          > |   3) Update a Movie                                |
          > |   4) Delete a Movie                                |
-         > |   5) Archive a Movie                               |
+         > |   5) Add To Cinema                               |
          > -----------------------------------------------------  
-         > | description MENU                                         | 
-         > |   6) Add description to a Movie                           |
-         > |   7) Update description contents on a Movie               |
-         > |   8) Delete description from a Movie                      |
-         > |   9) Mark description as complete/todo                   | 
+         > | actor MENU                                         | 
+         > |   6) Add Actor to a Movie                           |
+         > |   7) Update Actor contents on a Movie               |
+         > |   8) Delete Actor from a Movie                      |
+         > |   9) Mark Actor as complete/todo                   | 
          > -----------------------------------------------------  
          > | REPORT MENU FOR MovieS                             | 
          > |   10) Search for all Movies (by Movie title)        |
@@ -62,9 +62,9 @@ fun mainMenu() = readNextInt(
          > |   13) .....                                       |
          > |   14) .....                                       |
          > -----------------------------------------------------  
-         > | REPORT MENU FOR descriptionS                             |                                
-         > |   15) Search for all descriptions (by description description)  |
-         > |   16) List TODO descriptions                             |
+         > | REPORT MENU FOR actorS                             |                                
+         > |   15) Search for all Actor (by Actor Name)  |
+         > |   16) List TODO Actor                             |
          > |   17) .....                                       |
          > |   20) Save                                       |
          > |   21) Load                                       |
@@ -154,7 +154,7 @@ fun deleteMovie() {
     }
 }
 
-fun archiveMovie() {
+fun cinemaMovie() {
     listActiveMovies()
     if (MovieAPI.numberOfActiveMovies() > 0) {
         // only ask the user to choose the Movie to archive if active Movies exist
@@ -169,7 +169,7 @@ fun archiveMovie() {
 }
 
 //-------------------------------------------
-//description MENU (only available for active Movies)
+//actor MENU (only available for active Movies)
 //-------------------------------------------
 
 //TODO
@@ -178,7 +178,7 @@ fun archiveMovie() {
 //Movie REPORTS MENU
 //------------------------------------
 fun searchMovies() {
-    val searchTitle = readNextLine("Enter the description to search by: ")
+    val searchTitle = readNextLine("Enter the actor to search by: ")
     val searchResults = MovieAPI.searchMoviesByTitle(searchTitle)
     if (searchResults.isEmpty()) {
         println("No Movies found")
@@ -188,7 +188,7 @@ fun searchMovies() {
 }
 
 //------------------------------------
-//description REPORTS MENU
+//actor REPORTS MENU
 //------------------------------------
 
 //TODO
@@ -222,49 +222,49 @@ private fun askUserToChooseActiveMovie(): Movie? {
     return null //selected Movie is not active
 }
 
-private fun addDescriptionToMovie() {
+private fun addActorToMovie() {
     val Movie: Movie? = askUserToChooseActiveMovie()
     if (Movie != null) {
-        if (Movie.addDescription(Description(descriptionContents = readNextLine("\t description Contents: "))))
+        if (Movie.addActor(Actor(actorContents = readNextLine("\t actor Contents: "))))
             println("Add Successful!")
         else println("Add NOT Successful")
     }
 }
 
-fun updateDescriptionContentsInMovie() {
+fun updateActorContentsInMovie() {
     val Movie: Movie? = askUserToChooseActiveMovie()
     if (Movie != null) {
-        val description: Description? = askUserToChooseDescription(Movie)
-        if (description != null) {
+        val actor: Actor? = askUserToChooseActor(Movie)
+        if (actor != null) {
             val newContents = readNextLine("Enter new contents: ")
-            if (Movie.update(description.descriptionId, Description(descriptionContents = newContents))) {
-                println("description contents updated")
+            if (Movie.update(actor.actorId, Actor(actorContents = newContents))) {
+                println("actor contents updated")
             } else {
-                println("description contents NOT updated")
+                println("actor contents NOT updated")
             }
         } else {
-            println("Invalid description Id")
+            println("Invalid actor Id")
         }
     }
 }
 
-private fun askUserToChooseDescription(Movie: Movie): Description? {
-    if (Movie.numberOfDescriptions() > 0) {
-        print(Movie.listDescriptions())
-        return Movie.findOne(readNextInt("\nEnter the id of the description: "))
+private fun askUserToChooseActor(Movie: Movie): Actor? {
+    if (Movie.numberOfActors() > 0) {
+        print(Movie.listActors())
+        return Movie.findOne(readNextInt("\nEnter the id of the actor: "))
     }
     else{
-        println ("No descriptions for chosen Movie")
+        println ("No actors for chosen Movie")
         return null
     }
 }
 
-fun deleteAndescription() {
+fun deleteActor() {
     val Movie: Movie? = askUserToChooseActiveMovie()
     if (Movie != null) {
-        val description: Description? = askUserToChooseDescription(Movie)
-        if (description != null) {
-            val isDeleted = Movie.delete(description.descriptionId)
+        val actor: Actor? = askUserToChooseActor(Movie)
+        if (actor != null) {
+            val isDeleted = Movie.delete(actor.actorId)
             if (isDeleted) {
                 println("Delete Successful!")
             } else {
@@ -274,31 +274,31 @@ fun deleteAndescription() {
     }
 }
 
-fun markdescriptionStatus() {
+fun markactorStatus() {
     val Movie: Movie? = askUserToChooseActiveMovie()
     if (Movie != null) {
-        val description: Description? = askUserToChooseDescription(Movie)
-        if (description != null) {
+        val actor: Actor? = askUserToChooseActor(Movie)
+        if (actor != null) {
             var changeStatus = 'X'
-            if (description.isDescriptionComplete) {
-                changeStatus = readNextChar("The description is currently complete...do you want to mark it as TODO?")
+            if (actor.isActorComplete) {
+                changeStatus = readNextChar("The actor is currently complete...do you want to mark it as TODO?")
                 if ((changeStatus == 'Y') ||  (changeStatus == 'y'))
-                    description.isDescriptionComplete = false
+                    actor.isActorComplete = false
             }
             else {
-                changeStatus = readNextChar("The description is currently TODO...do you want to mark it as Complete?")
+                changeStatus = readNextChar("The actor is currently TODO...do you want to mark it as Complete?")
                 if ((changeStatus == 'Y') ||  (changeStatus == 'y'))
-                    description.isDescriptionComplete = true
+                    actor.isActorComplete = true
             }
         }
     }
 }
 
-fun searchdescriptions() {
-    val searchContents = readNextLine("Enter the description contents to search by: ")
-    val searchResults = MovieAPI.searchDescriptionByContents(searchContents)
+fun searchactors() {
+    val searchContents = readNextLine("Enter the actor contents to search by: ")
+    val searchResults = MovieAPI.searchactorByContents(searchContents)
     if (searchResults.isEmpty()) {
-        println("No descriptions found")
+        println("No actors found")
     } else {
         println(searchResults)
     }
@@ -306,11 +306,11 @@ fun searchdescriptions() {
 
 
 
-fun listToDoDescriptions(){
-    if (MovieAPI.numberOfToDoDescriptions() > 0) {
-        println("Total TODO descriptions: ${MovieAPI.numberOfToDoDescriptions()}")
+fun listToDoactors(){
+    if (MovieAPI.numberOfToDoactors() > 0) {
+        println("Total TODO actors: ${MovieAPI.numberOfToDoactors()}")
     }
-    println(MovieAPI.listToDoDescriptions())
+    println(MovieAPI.listToDoactors())
 }
 
 fun save() {

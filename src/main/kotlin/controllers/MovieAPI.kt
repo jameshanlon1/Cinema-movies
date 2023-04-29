@@ -1,7 +1,6 @@
 package controllers
 
 import Persistence.Serializer
-import models.Description
 import models.Movie
 import utils.Utilities.formatListString
 import java.util.ArrayList
@@ -87,50 +86,50 @@ class MovieAPI(serializerType: Serializer) {
 
 
     // ----------------------------------------------
-    //  LISTING METHODS FOR Description
+    //  LISTING METHODS FOR actor
     // ----------------------------------------------
-    fun listToDoDescriptions(): String =
+    fun listToDoactors(): String =
         if (numberOfMovies() == 0) "No Movies stored"
         else {
-            var listOfTodoDescription = ""
+            var listOfTodoactor = ""
             for (Movie in Movies) {
-                for (description in Movie.descriptions) {
-                    if (!description.isDescriptionComplete) {
-                        listOfTodoDescription += Movie.MovieTitle + ": " + description.descriptionContents + "\n"
+                for (actor in Movie.actors) {
+                    if (!actor.isactorComplete) {
+                        listOfTodoactor += Movie.MovieTitle + ": " + actor.actorContents + "\n"
                     }
                 }
             }
-            listOfTodoDescription
+            listOfTodoactor
         }
 
     // ----------------------------------------------
-    //  COUNTING METHODS FOR Description
+    //  COUNTING METHODS FOR actor
     // ----------------------------------------------
-    fun numberOfToDoDescriptions(): Int {
-        var numberOfToDoDescriptions = 0
+    fun numberOfToDoactors(): Int {
+        var numberOfToDoactors = 0
         for (Movie in Movies) {
-            for (description in Movie.descriptions) {
-                if (!description.isDescriptionComplete) {
-                    numberOfToDoDescriptions++
+            for (actor in Movie.actors) {
+                if (!actor.isactorComplete) {
+                    numberOfToDoactors++
                 }
             }
         }
-        return numberOfToDoDescriptions
+        return numberOfToDoactors
     }
 
 
-    fun searchDescriptionByContents(searchString: String): String {
+    fun searchactorByContents(searchString: String): String {
         return if (numberOfMovies() == 0) "No Movies stored"
         else {
             var listOfMovies = ""
             for (Movie in Movies) {
-                for (description in Movie.descriptions) {
-                    if (description.descriptionContents.contains(searchString, ignoreCase = true)) {
-                        listOfMovies += "${Movie.MovieId}: ${Movie.MovieTitle} \n\t${description}\n"
+                for (actor in Movie.actors) {
+                    if (actor.actorContents.contains(searchString, ignoreCase = true)) {
+                        listOfMovies += "${Movie.MovieId}: ${Movie.MovieTitle} \n\t${actor}\n"
                     }
                 }
             }
-            if (listOfMovies == "") "No description found for: $searchString"
+            if (listOfMovies == "") "No actor found for: $searchString"
             else listOfMovies
         }
     }

@@ -7,32 +7,32 @@ data class Movie(var MovieId: Int = 0,
                 var MoviePriority: Int,
                 var MovieCategory: String,
                 var isMovieArchived: Boolean = false,
-                var descriptions : MutableSet<Description> = mutableSetOf()){
-    private var lastDescriptionId = 0
-    private fun getDescriptionId() = lastDescriptionId++
+                var actors : MutableSet<Actor> = mutableSetOf()){
+    private var lastActorId = 0
+    private fun getActorId() = lastActorId++
 
-    fun addDescription(description: Description) : Boolean {
-        description.descriptionId = getDescriptionId()
-        return descriptions.add(description)
+    fun addActor(actor: Actor) : Boolean {
+        actor.actorId = getActorId()
+        return actors.add(actor)
     }
-    fun numberOfDescriptions() = descriptions.size
+    fun numberOfActors() = actors.size
 
-    fun findOne(id: Int): Description?{
-        return descriptions.find{ description -> description.descriptionId == id }
+    fun findOne(id: Int): Actor?{
+        return actors.find{ Actor -> Actor.actorId == id }
     }
 
     fun delete(id: Int): Boolean {
-        return descriptions.removeIf { description -> description.descriptionId == id}
+        return actors.removeIf { Actor -> Actor.actorId == id}
     }
 
-    fun update(id: Int, newdescription : Description): Boolean {
-        val foundDescription = findOne(id)
+    fun update(id: Int, newActor : Actor): Boolean {
+        val foundActor = findOne(id)
 
-        //if the object exists, use the details passed in the newdescription parameter to
+        //if the object exists, use the details passed in the newActor parameter to
         //update the found object in the Set
-        if (foundDescription != null){
-            foundDescription.descriptionContents = newdescription.descriptionContents
-            foundDescription.isDescriptionComplete = newdescription.isDescriptionComplete
+        if (foundActor != null){
+            foundActor.actorContents = newActor.actorContents
+            foundActor.isActorComplete = newActor.isActorComplete
             return true
         }
 
@@ -40,26 +40,26 @@ data class Movie(var MovieId: Int = 0,
         return false
     }
 
-    fun listDescriptions() =
-        if (descriptions.isEmpty())  "\tNO descriptionS ADDED"
-        else  Utilities.formatSetString(descriptions)
+    fun listActors() =
+        if (actors.isEmpty())  "\tNO ActorS ADDED"
+        else  Utilities.formatSetString(actors)
 
 
     override fun toString(): String {
         val archived = if (isMovieArchived) 'Y' else 'N'
-        return "$MovieId: $MovieTitle, Priority($MoviePriority), Category($MovieCategory), Archived($archived) \n${listDescriptions()}"
+        return "$MovieId: $MovieTitle, Priority($MoviePriority), Category($MovieCategory), Archived($archived) \n${listActors()}"
     }
 
 
-    fun checkNoteCompletionStatus(): Boolean {
-        if (descriptions.isNotEmpty()) {
-            for (description in descriptions) {
-                if (!description.isDescriptionComplete) {
+    fun checkMovieCompletionStatus(): Boolean {
+        if (actors.isNotEmpty()) {
+            for (Actor in actors) {
+                if (!Actor.isActorComplete) {
                     return false
                 }
             }
         }
-        return true //a note with empty descriptions can be archived, or all descriptions are complete
+        return true //a note with empty Actors can be archived, or all Actors are complete
     }
 
 
