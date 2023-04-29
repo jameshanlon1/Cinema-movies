@@ -1,12 +1,16 @@
+import Persistence.JSONSerializer
 import controllers.MovieAPI
 import models.Description
 import models.Movie
 import utils.ScannerInput.readNextChar
 import utils.ScannerInput.readNextInt
 import utils.ScannerInput.readNextLine
+import java.io.File
 import kotlin.system.exitProcess
 
-private val MovieAPI = MovieAPI()
+
+
+private val MovieAPI = MovieAPI(JSONSerializer(File("movies.json")))
 
 fun main() = runMenu()
 
@@ -25,6 +29,8 @@ fun runMenu() {
             10 -> searchMovies()
             15 -> searchdescriptions()
             16 -> listToDoDescriptions()
+            20  ->save()
+            21  ->load()
             0 -> exitApp()
             else -> println("Invalid menu choice: $option")
         }
@@ -60,8 +66,8 @@ fun mainMenu() = readNextInt(
          > |   15) Search for all descriptions (by description description)  |
          > |   16) List TODO descriptions                             |
          > |   17) .....                                       |
-         > |   18) .....                                       |
-         > |   19) .....                                       |
+         > |   20) Save                                       |
+         > |   21) Load                                       |
          > -----------------------------------------------------  
          > |   0) Exit                                         |
          > -----------------------------------------------------  
@@ -305,4 +311,20 @@ fun listToDoDescriptions(){
         println("Total TODO descriptions: ${MovieAPI.numberOfToDoDescriptions()}")
     }
     println(MovieAPI.listToDoDescriptions())
+}
+
+fun save() {
+    try {
+        MovieAPI.store()
+    } catch (e: Exception) {
+        System.err.println("Error writing to file: $e")
+    }
+}
+
+fun load() {
+    try {
+        MovieAPI.load()
+    } catch (e: Exception) {
+        System.err.println("Error reading from file: $e")
+    }
 }
