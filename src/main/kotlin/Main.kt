@@ -42,18 +42,13 @@ fun mainMenu() = readNextInt(
          > -----------------------------------------------------  
          > |                  Cinema APP                        |
          > -----------------------------------------------------  
-         > | Movie MENU                                         |
-         > |   1) Add a Movie                                   |
-         > |   2) List Movies                                   |
-         > |   3) Update a Movie                                |
-         > |   4) Delete a Movie                                |
+         > | Movie MENU                                         |         > | Actor MENU                                         | 
+         > |   1) Add a Movie                                   |         > |   6) Add Actor to a Movie                           |
+         > |   2) List Movies                                   |         > |   7) Update Actor Actor on a Movie               |
+         > |   3) Update a Movie                                |         > |   8) Delete Actor from a Movie                      |
+         > |   4) Delete a Movie                                |         > |   9) Mark Actor as Oscar Winner or Not                | 
          > |   5) Add To Cinema                               |
          > -----------------------------------------------------  
-         > | Actor MENU                                         | 
-         > |   6) Add Actor to a Movie                           |
-         > |   7) Update Actor Actor on a Movie               |
-         > |   8) Delete Actor from a Movie                      |
-         > |   9) Mark Actor as Oscar Winner or Not                | 
          > -----------------------------------------------------  
          > | Search MENU FOR Movies                             | 
          > |   10) Search for all Movies (by Movie title)        |
