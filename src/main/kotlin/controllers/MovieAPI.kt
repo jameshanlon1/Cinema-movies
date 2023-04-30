@@ -43,7 +43,7 @@ class MovieAPI(serializerType: Serializer) {
         return false
     }
 
-    fun archiveMovie(id: Int): Boolean {
+    fun cinemaMovie(id: Int): Boolean {
         val foundMovie = findMovie(id)
         if (( foundMovie != null) && (!foundMovie.isMovieInCinema)
         //  && ( foundMovie.checkMovieCompletionStatus())
@@ -61,19 +61,19 @@ class MovieAPI(serializerType: Serializer) {
         if (Movies.isEmpty()) "No Movies stored"
         else formatListString(Movies)
 
-    fun listActiveMovies() =
+    fun listNotCinemaMovies() =
         if (numberOfNotCinemaMovies() == 0) "No Out of Cinema Movies stored"
         else formatListString(Movies.filter { Movie -> !Movie.isMovieInCinema })
 
-    fun listArchivedMovies() =
-        if (numberOfArchivedMovies() == 0) "No Cinema Movies stored"
+    fun listCinemaMovies() =
+        if (numberOfCinemaMovies() == 0) "No Cinema Movies stored"
         else formatListString(Movies.filter { Movie -> Movie.isMovieInCinema })
 
     // ----------------------------------------------
     //  COUNTING METHODS FOR Movie ArrayList
     // ----------------------------------------------
     fun numberOfMovies() = Movies.size
-    fun numberOfArchivedMovies(): Int = Movies.count { Movie: Movie -> Movie.isMovieInCinema }
+    fun numberOfCinemaMovies(): Int = Movies.count { Movie: Movie -> Movie.isMovieInCinema }
     fun numberOfNotCinemaMovies(): Int = Movies.count { Movie: Movie -> !Movie.isMovieInCinema }
 
     // ----------------------------------------------
@@ -88,37 +88,37 @@ class MovieAPI(serializerType: Serializer) {
     // ----------------------------------------------
     //  LISTING METHODS FOR actor
     // ----------------------------------------------
-    fun listToDoActors(): String =
+    fun listNonOscarActors(): String =
         if (numberOfMovies() == 0) "No Movies stored"
         else {
-            var listOfTodoactor = ""
+            var listOfNonOscarActor = ""
             for (Movie in Movies) {
                 for (actor in Movie.actors) {
                     if (!actor.isActorOscar) {
-                        listOfTodoactor += Movie.MovieTitle + ": " + actor.actorName + "\n"
+                        listOfNonOscarActor += Movie.MovieTitle + ": " + actor.actorName + "\n"
                     }
                 }
             }
-            listOfTodoactor
+            listOfNonOscarActor
         }
 
     // ----------------------------------------------
     //  COUNTING METHODS FOR actor
     // ----------------------------------------------
-    fun numberOfToDoActors(): Int {
-        var numberOfToDoactors = 0
+    fun numberOfNonOscarActors(): Int {
+        var numberOfNonOscarActors = 0
         for (Movie in Movies) {
             for (actor in Movie.actors) {
                 if (!actor.isActorOscar) {
-                    numberOfToDoactors++
+                    numberOfNonOscarActors++
                 }
             }
         }
-        return numberOfToDoactors
+        return numberOfNonOscarActors
     }
 
 
-    fun searchActorByContents(searchString: String): String {
+    fun searchActorByName(searchString: String): String {
         return if (numberOfMovies() == 0) "No Movies stored"
         else {
             var listOfMovies = ""

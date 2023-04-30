@@ -90,8 +90,8 @@ fun listMovies() {
 
         when (option) {
             1 -> listAllMovies()
-            2 -> listActiveMovies()
-            3 -> listArchivedMovies()
+            2 -> listNonCinemaMovies()
+            3 -> listCinemaMovies()
             else -> println("Invalid option entered: $option")
         }
     } else {
@@ -100,8 +100,8 @@ fun listMovies() {
 }
 
 fun listAllMovies() = println(MovieAPI.listAllMovies())
-fun listActiveMovies() = println(MovieAPI.listActiveMovies())
-fun listArchivedMovies() = println(MovieAPI.listArchivedMovies())
+fun listNonCinemaMovies() = println(MovieAPI.listNotCinemaMovies())
+fun listCinemaMovies() = println(MovieAPI.listCinemaMovies())
 
 fun updateMovie() {
     listMovies()
@@ -141,12 +141,12 @@ fun deleteMovie() {
 }
 
 fun cinemaMovie() {
-    listActiveMovies()
+    listNonCinemaMovies()
     if (MovieAPI.numberOfNotCinemaMovies() > 0) {
         // only ask the user to choose the Movie to archive if active Movies exist
         val id = readNextInt("Enter the id of the Movie to add to cinema: ")
         // pass the index of the Movie to MovieAPI for archiving and check for success.
-        if (MovieAPI.archiveMovie(id)) {
+        if (MovieAPI.cinemaMovie(id)) {
             println("Added Successful!")
         } else {
             println("NOT Added Successful")
@@ -277,8 +277,8 @@ fun markActorStatus() {
 }
 
 fun searchActors() {
-    val searchContents = readNextLine("Enter the actor name to search by: ")
-    val searchResults = MovieAPI.searchActorByContents(searchContents)
+    val searchName = readNextLine("Enter the actor name to search by: ")
+    val searchResults = MovieAPI.searchActorByName(searchName)
     if (searchResults.isEmpty()) {
         println("No actors found")
     } else {
@@ -289,10 +289,10 @@ fun searchActors() {
 
 
 fun listNotOscarActors(){
-    if (MovieAPI.numberOfToDoActors() > 0) {
-        println("Total Oscar winners actors: ${MovieAPI.numberOfToDoActors()}")
+    if (MovieAPI.numberOfNonOscarActors() > 0) {
+        println("Total Oscar winners actors: ${MovieAPI.numberOfNonOscarActors()}")
     }
-    println(MovieAPI.listToDoActors())
+    println(MovieAPI.listNonOscarActors())
 }
 
 fun save() {
