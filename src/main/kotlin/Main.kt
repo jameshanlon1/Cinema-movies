@@ -52,7 +52,7 @@ fun mainMenu() = readNextInt(
          > | Search MENU FOR Movies                             |          > | REPORT MENU FOR Actors                             |                                
          > |   10) Search for all Movies (by Movie title)       |          > |   11) Search for all Actor (by Actor Name)         |
          > -----------------------------------------------------           > |   12) List Oscar Winning Actors                    |
-         > |   20) Save                                         |
+         > |   20) Save                                         |-----------------------------------------------------------------|
          > |   21) Load                                         |
          > -----------------------------------------------------  
          > |   0) Exit                                          |
