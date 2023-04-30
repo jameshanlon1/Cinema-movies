@@ -51,16 +51,7 @@ data class Movie(var MovieId: Int = 0,
     }
 
 
-    fun checkMovieCompletionStatus(): Boolean {
-        if (actors.isNotEmpty()) {
-            for (Actor in actors) {
-                if (!Actor.isActorOscar) {
-                    return false
-                }
-            }
-        }
-        return true //a note with empty Actors can be archived, or all Actors are complete
-    }
+
 
 
 }
