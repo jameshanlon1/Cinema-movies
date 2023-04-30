@@ -94,7 +94,7 @@ class MovieAPI(serializerType: Serializer) {
             var listOfNonOscarActor = ""
             for (Movie in Movies) {
                 for (actor in Movie.actors) {
-                    if (!actor.isActorOscar) {
+                    if (actor.isActorOscar) {
                         listOfNonOscarActor += Movie.MovieTitle + ": " + actor.actorName + "\n"
                     }
                 }
@@ -109,7 +109,7 @@ class MovieAPI(serializerType: Serializer) {
         var numberOfNonOscarActors = 0
         for (Movie in Movies) {
             for (actor in Movie.actors) {
-                if (!actor.isActorOscar) {
+                if (actor.isActorOscar) {
                     numberOfNonOscarActors++
                 }
             }

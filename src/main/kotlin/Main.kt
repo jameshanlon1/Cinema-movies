@@ -164,7 +164,7 @@ fun cinemaMovie() {
 //Movie REPORTS MENU
 //------------------------------------
 fun searchMovies() {
-    val searchTitle = readNextLine("Enter the actor to search by: ")
+    val searchTitle = readNextLine("Enter the Title to search by: ")
     val searchResults = MovieAPI.searchMoviesByTitle(searchTitle)
     if (searchResults.isEmpty()) {
         println("No Movies found")
